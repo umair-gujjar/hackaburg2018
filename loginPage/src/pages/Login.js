@@ -19,8 +19,8 @@ import TextButton from '../components/textButton/index';
 export default class Login extends Component {
 
     state = {
-        username: 'demo',
-        password: 'demo'
+        username: '',
+        password: ''
     };
 
     constructor(props) {
