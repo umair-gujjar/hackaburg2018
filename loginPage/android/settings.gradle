@@ -1,0 +1,3 @@
+rootProject.name = 'ReactNativeCommonScreens'
+
+include ':app'
