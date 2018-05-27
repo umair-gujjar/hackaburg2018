@@ -4,11 +4,12 @@ import {
 } from 'react-native';
 
 import Login from './src/pages/Login';
+import Intro from './src/pages/Intro';
 
 export default class ReactNativeCommonScreens extends Component {
   render() {
     return (
-      <Login />
+      <Intro />
     );
   }
 }
