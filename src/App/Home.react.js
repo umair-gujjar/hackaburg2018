@@ -87,7 +87,7 @@ export default class Login extends Component {
             <View style={styles.inline , {marginTop: 20,alignItems:'stretch'}}> 
 
                     <TextButton 
-                        title="Swipe right to see news >>" 
+                        title="Swipe to Zoom Fire News >>" 
                         id='moveToNews' 
                         titleStyle={styles.buttonTextStyle,{alignSelf:'center',backgroundColor:'#E1D7D800'}}
                         titleColor = '#d7490b'

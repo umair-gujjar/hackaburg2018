@@ -3,10 +3,11 @@ import { PropTypes } from 'prop-types';
 import { StyleSheet, Text, View, Image,ToastAndroid, ScrollView, Platform, Animated, Easing } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import routes from '../routes';
+import ActionButton from 'react-native-action-button';
+import MultiSelect from 'react-native-multiple-select';
 import Container from '../Container';
 // components
 import {
-    ActionButton,
     Avatar,
     ListItem,
     Toolbar,
@@ -73,7 +74,7 @@ class NoMoreCards extends React.Component {
   }
 }
 
-class Read extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
 
@@ -88,7 +89,11 @@ class Read extends Component {
             active: 'people',
             moveAnimated: new Animated.Value(0),
         };
+
+
     }
+
+   
     handleYup (card) {
         console.log("like")
     }
@@ -226,40 +231,33 @@ class Read extends Component {
         );
     }
     render() {
+        let data = [{
+          value: '#hasttag1',
+        }, {
+          value: '#hasttag2',
+        }, {
+          value: '#hasttag3',
+        }];
         return (
             <Container>
                 {this.renderToolbar()}
                 <SwipeCards
-                        cards={this.state.cards}
-                        loop={true}
-                        renderCard={(cardData) => <Card {...cardData} />}
-                        renderNoMoreCards={() => <NoMoreCards />}
-                        showYup={true}
-                        showNope={true}
-                        handleYup={this.handleYup}
-                        handleNope={this.handleNope}
-                        handleMaybe={this.handleMaybe}
-                        hasMaybeAction
-                        cardRemoved={this.cardRemoved.bind(this)}
-                    />
+                    cards={this.state.cards}
+                    loop={true}
+                    renderCard={(cardData) => <Card {...cardData} />}
+                    renderNoMoreCards={() => <NoMoreCards />}
+                    showYup={true}
+                    showNope={true}
+                    handleYup={this.handleYup}
+                    handleNope={this.handleNope}
+                    handleMaybe={this.handleMaybe}
+                    hasMaybeAction
+                    cardRemoved={this.cardRemoved.bind(this)}
+                />
                 <ActionButton
-                    actions={[
-                        { icon: 'email', label: 'Email' },
-                        { icon: 'phone', label: 'Phone' },
-                        { icon: 'sms', label: 'Text' },
-                        { icon: 'favorite', label: 'Favorite' },
-                    ]}
-                    hidden={this.state.bottomHidden}
-                    icon="share"
-                    transition="speedDial"
-                    onPress={(action) => {
-                        if (Platform.OS === 'android') {
-                            ToastAndroid.show(action, ToastAndroid.SHORT);
-                        }
-                    }}
-                    style={{
-                        positionContainer: { bottom: 76 },
-                    }}
+                    style={{ bottom: 30}}
+                  buttonColor="#3B5699"
+                  onPress={() => { this.props.navigation.navigate('post')}}
                 />
             </Container>
         );
@@ -270,6 +268,7 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         marginTop: 50,
+        marginBottom: 50,
         alignItems: 'center',
         borderRadius: 5,
         overflow: 'hidden',
@@ -291,8 +290,9 @@ const styles = StyleSheet.create({
     },
     thumbnail: {
         width: 360,
-        height: 400,
+        height: 200,
     },
+    
     text: {
         fontSize: 20,
         paddingTop: 10,
@@ -305,6 +305,6 @@ const styles = StyleSheet.create({
     }
 })
 
-Read.propTypes = propTypes;
-export default Read;
+Home.propTypes = propTypes;
+export default Home;
 

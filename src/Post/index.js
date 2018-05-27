@@ -6,6 +6,7 @@ import { Button } from 'react-native-material-ui';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { Dialog } from 'react-native-simple-dialogs';
 import Tags from '../../src/components/Tags';
+import NewTagModal from '../../src/components/NewTagModal';
 import routes from '../routes';
 import Container from '../Container';
 // components
@@ -30,6 +31,10 @@ const TAGS = [
     '#Journalism',
 ];
 
+type State = {
+  modalVisible: boolean,
+};
+
 const propTypes = {
     navigation: PropTypes.shape({
         goBack: PropTypes.func.isRequired,
@@ -44,6 +49,7 @@ class Post extends Component {
         this.offset = 0;
         this.scrollDirection = 0;
         this.state = {
+            modalVisible: false,
             selected: [],
             dialogVisible: false,
             selectedIndex: 0,
@@ -128,9 +134,9 @@ class Post extends Component {
         return (
             <Toolbar
                 key="toolbar"
-                leftElement="menu"
+                leftElement="close"
                 onLeftElementPress={() => this.props.navigation.goBack()}
-                centerElement="Home"
+                centerElement="Add Post"
                 searchable={{
                     autoFocus: true,
                     placeholder: 'Search',
@@ -141,7 +147,7 @@ class Post extends Component {
         );
     }
     showDialog = () => {
-    this.setState({ dialogVisible: true });
+        this.setState({ dialogVisible: true ,  });
   };
  
   handleCancel = () => {
@@ -171,9 +177,27 @@ class Post extends Component {
 
         );
     }
+
+    // Reference Tags component
+    _tagsComponent: ?Tags;
+
+    openModal = () => {
+    this.setState({ modalVisible: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modalVisible: false });
+  };
+
+  onSubmitNewTag = (tag: string) => {
+    this._tagsComponent && this._tagsComponent.onSubmitNewTag(tag);
+  };
+
     render() {
 
+        const { modalVisible } = this.state;
         return (
+
             <Container>
                 {this.renderToolbar()}
                 <ScrollView
@@ -197,19 +221,23 @@ class Post extends Component {
                             }
                         }}
                     >
-                        <Image
-                            style={{
-                                paddingVertical: 30,
-                                width: 150,
-                                height: 60,
-                                borderRadius: 25,
-                                backgroundColor: '#4285f4'
-                            }}
-                            resizeMode='cover'
-                            source={{
-                                uri: 'https://png.icons8.com/small/1600/add-camera.png'
-                            }}
-                        />
+                        <View style={{
+                                    width: 300,
+                                    height: 60,
+                                    borderRadius: 25,
+                                    backgroundColor: '#3B5699'
+                                }}>
+                            <Image
+                                style={{
+                                    paddingVertical: 30,
+                                    alignSelf: 'center',
+                                    width: 60,
+                                    height: 60,
+                                }}
+                                resizeMode='cover'
+                                source={require('../../assets/images/plus.png')}
+                            />
+                        </View>
                     </PhotoUpload>
                     <View style={{margin: 20}}>
                         <ScrollView>
@@ -217,15 +245,23 @@ class Post extends Component {
                             <TextInput style={{ flex:2, backgroundColor: '#ffffff', minHeight: '65%', maxHeight: 410,borderColor: '#3b5998',borderRadius: 5,borderWidth: 2,}} multiline={true} numberOfLines={10} />
                         </ScrollView>
                     </View>
+                    <View>
+                        <NewTagModal
+                          visible={modalVisible}
+                          onSubmit={this.onSubmitNewTag}
+                          onClose={this.closeModal}
+                        />
+                    </View>
                     <View style={{margin: 7}}>
                         <Tags
                         style={{flex:2, backgroundColor: '#3b5998'}}
+                            ref={component => this._tagsComponent = component }
                           tags={TAGS}
-                          onPressAddNewTag={() => {}} // do nothing for now
+                          onPressAddNewTag={this.openModal}
                         />
                     </View>
                     <View style={{margin: 20}}>
-                        <Button raised primary text="Post It!!" onPress={this.showDialog}/>
+                        <Button raised primary text="Post It!!" onPress={this.showDialog} style={{backgroundColor: '#3B5699'}}/>
                     </View>
                 </ScrollView>
                 <Dialog 
@@ -239,7 +275,7 @@ class Post extends Component {
                                 uri: 'https://upload.wikimedia.org/wikipedia/en/e/e4/Green_tick.png'
                             }}
                         />
-                        <Button raised primary text="OK" onPress={this.handleCancel}/>
+                        <Button raised primary text="OK" onPress={this.handleCancel} style={{backgroundColor: '#3B5699'}}/>
                     </View>
                 </Dialog>
             </Container>

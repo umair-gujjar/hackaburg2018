@@ -202,9 +202,9 @@ class Login extends Component {
                     <RaisedTextButton 
                         title="Sign In"
                         id='signIn' 
-                        titleStyle={styles.buttonTextStyle,{alignSelf:'center',backgroundColor:'green',paddingLeft:40,paddingRight:40}}
+                        titleStyle={styles.buttonTextStyle,{alignSelf:'center',backgroundColor:'#3B5699',paddingLeft:40,paddingRight:40}}
                         titleColor = 'white'
-                        style={{alignSelf:'center',backgroundColor:'green'}}
+                        style={{alignSelf:'center',backgroundColor:'#3B5699'}}
                         onPress={() => this.props.navigation.navigate('read')} />
             </View>
             <View style={styles.inline , {marginTop: 20}}> 
