@@ -1,0 +1,49 @@
+{
+  "name": "Zoom",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "restart": "rm -rf $TMPDIR/react-* && watchman watch-del-all && node node_modules/react-native/local-cli/cli.js start -- --reset-cache",
+    "clear": "watchman watch-del-all && rm -fr $TMPDIR/react-*",
+    "lint": "eslint ./",
+    "flow": "flow"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  },
+  "dependencies": {
+    "babel-eslint": "8.0.2",
+    "color": "2.0.1",
+    "eslint": "4.12.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.5.1",
+    "lodash.merge": "^4.6.0",
+    "prop-types": "^15.5.10",
+    "react": "16.0.0",
+    "react-native": "0.50.4",
+    "react-native-dialog": "^3.3.0",
+    "react-native-material-buttons": "^0.5.0",
+    "react-native-material-design-styles": "^0.2.6",
+    "react-native-material-dialog": "^0.7.4",
+    "react-native-material-dropdown": "^0.11.1",
+    "react-native-multiple-select": "^0.4.4",
+    "react-native-photo-upload": "^1.2.0",
+    "react-native-popup-dialog": "^0.11.46",
+    "react-native-radio-buttons": "^1.0.0",
+    "react-native-segmented-control-tab": "^3.2.2",
+    "react-native-simple-dialogs": "^0.3.1",
+    "react-native-swipe-cards": "^0.1.1",
+    "react-native-swipe-gestures": "^1.0.2",
+    "react-native-vector-icons": "^4.4.2",
+    "react-navigation": "^1.0.0-beta.21",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.56.0"
+  }
+}
